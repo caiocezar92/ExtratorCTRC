@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "dgSpecHash": "RRg/55quRhfHAcnpmVEajTE6ui1PcdPNFcU6w77lgmWQqQnPTIDGAuIMeVR8a1Iyu8y1GvkxAY0esyjqAbIyiA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\caio.gomes\\source\\repos\\ExtratorCTRC\\ExtratorCTRC\\ExtratorCTRC.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\caio.gomes\\.nuget\\packages\\closedxml\\0.96.0\\closedxml.0.96.0.nupkg.sha512",
+    "C:\\Users\\caio.gomes\\.nuget\\packages\\csvhelper\\28.0.1\\csvhelper.28.0.1.nupkg.sha512",
+    "C:\\Users\\caio.gomes\\.nuget\\packages\\documentformat.openxml\\2.16.0\\documentformat.openxml.2.16.0.nupkg.sha512",
+    "C:\\Users\\caio.gomes\\.nuget\\packages\\excelnumberformat\\1.1.0\\excelnumberformat.1.1.0.nupkg.sha512",
+    "C:\\Users\\caio.gomes\\.nuget\\packages\\htmlagilitypack\\1.11.43\\htmlagilitypack.1.11.43.nupkg.sha512",
+    "C:\\Users\\caio.gomes\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\caio.gomes\\.nuget\\packages\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
+    "C:\\Users\\caio.gomes\\.nuget\\packages\\microsoft.win32.systemevents\\4.5.0\\microsoft.win32.systemevents.4.5.0.nupkg.sha512",
+    "C:\\Users\\caio.gomes\\.nuget\\packages\\system.drawing.common\\4.5.0\\system.drawing.common.4.5.0.nupkg.sha512",
+    "C:\\Users\\caio.gomes\\.nuget\\packages\\system.io.packaging\\4.7.0\\system.io.packaging.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}
