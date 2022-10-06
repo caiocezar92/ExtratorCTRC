@@ -1,4 +1,5 @@
 ﻿using ClosedXML.Excel;
+using ExtratorCTRC.Exceptions;
 using ExtratorCTRC.Models;
 using ExtratorCTRC.Utils;
 using HtmlAgilityPack;
@@ -36,9 +37,12 @@ namespace ExtratorCTRC.Business
 
             string htmlOutput = doc.DocumentNode.OuterHtml.StripHTML().HandlesHtmlText();
 
+            if (htmlOutput.Contains("MaterialativoPCP"))
+              htmlOutput = ExtensionMethods.ReplaceString(htmlOutput, "MaterialativoPCP", "ProdAcabadoCerveja");
+
             ctrc.DataEmissao = ExtensionMethods.GetBetween(htmlOutput, "Emissão.........:", "C");
             ctrc.DocTransportes = ExtensionMethods.ExtractFromBody(htmlOutput, "Doc.Transp.....:", "E");
-            ctrc.Placas = ExtensionMethods.ExtractFromBody(htmlOutput, "PlacaCarreta...:", "T");
+            ctrc.Placas = ExtensionMethods.ExtractFromBody(htmlOutput, "PlacaCarreta...:", "Tipo");
 
             var rowsMunicipios = ExtensionMethods.ExtractFromBody(htmlOutput, "Destinatário....:", "UF..............:");
 
@@ -55,7 +59,7 @@ namespace ExtratorCTRC.Business
             ctrc.Etapas2DT = ExtensionMethods.ExtractFromBody(htmlOutput, "EtapadoDT.....:", "I");
 
             ctrc.NFs01 = ExtensionMethods.ExtractFromBody(htmlOutput, "PesoValorMercadoria", "Pr");
-  
+
             ctrc.ValoresFretesPesos = ExtensionMethods.ExtractFromBody(htmlOutput, "FretePeso......:", "M");
 
             listCtrcs.Add(ctrc);
@@ -130,9 +134,16 @@ namespace ExtratorCTRC.Business
 
     private string CreateXLS(List<CTRC> ctrcs)
     {
+      XLWorkbook? workbook = null;
+
       try
       {
-        var workbook = new XLWorkbook();
+        string fileName = $"C:\\Espelhos\\Espelhos {ctrcs?.FirstOrDefault()?.DataEmissao.ReturnNameMonth()}.xlsx";
+
+        if (File.Exists(fileName))
+          workbook = new XLWorkbook(fileName);
+        else
+          workbook = new XLWorkbook();
 
         foreach (var dadoCtrc in ctrcs)
         {
@@ -238,14 +249,13 @@ namespace ExtratorCTRC.Business
 
         workbook.SaveAs(@$"C:\Espelhos\Espelhos {ctrcs?.FirstOrDefault()?.DataEmissao.ReturnNameMonth()}.xlsx");
 
+        workbook.SaveAs("BasicTable_Modified.xlsx");
+
         return $"Planilha Espelhos {ctrcs?.FirstOrDefault()?.DataEmissao.ReturnNameMonth()}.xlsx criada com sucesso! Acesse o caminho C:\\Espelhos para localizar a mesma!";
       }
       catch (Exception ex)
       {
-        if (ex.Message.Contains("used by another process"))
-          throw new Exception("Erro ao salvar planilha: A planilha está aberta, feche a mesma e execute o processo novamente!");
-        else
-          throw new Exception($"Erro ao salvar planilha: {ex}");
+        throw new Exception(ex.Message.ReturnTreatedException());
       }
     }
 

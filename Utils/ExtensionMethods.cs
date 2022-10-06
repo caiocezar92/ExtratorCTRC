@@ -64,10 +64,15 @@ namespace ExtratorCTRC.Utils
       }
       catch
       {
-        return null;
+        return matched;
       }
 
       return matched;
+    }
+
+    public static string ReplaceString(string strSource, string wanted, string replaced)
+    {
+      return strSource.Replace(wanted, replaced);
     }
 
     public static List<string> ReturnOrderByStringNumber(this List<string> listStrings)
@@ -77,7 +82,9 @@ namespace ExtratorCTRC.Utils
 
     public static string ReturnNameMonth(this string data)
     {
-      int codmonth = Convert.ToInt16(data.Substring(4, 1));
+      data = data.Replace(".", string.Empty).Trim();
+
+      int codmonth = Convert.ToInt16(data.Substring(2, 2));
 
       return MonthName(codmonth);
     }

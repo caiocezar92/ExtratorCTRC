@@ -16,7 +16,7 @@ namespace ExtratorCTRC.Controllers
 
     public IActionResult Index(ArquivoModel arq)
     {
-      DateTime value = new DateTime(DateTime.Now.Year, 10, 3);
+      DateTime value = new DateTime(DateTime.Now.Year, 10,10);
 
       try
       {
